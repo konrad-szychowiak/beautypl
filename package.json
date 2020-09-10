@@ -1,12 +1,12 @@
 {
   "name": "prolog-lint",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
     "build": "tsc --build tsconfig.json",
     "start": "yarn run build && node src/parser.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",

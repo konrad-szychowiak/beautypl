@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FArgsToken = exports.ListToken = void 0;
+exports.RBodyToken = exports.FArgsToken = exports.ListToken = void 0;
 var uuid_1 = require("uuid");
 var GroupToken = /** @class */ (function () {
     function GroupToken(content, start, end) {
@@ -21,7 +21,7 @@ var GroupToken = /** @class */ (function () {
         this.args = content;
         this.start = start;
         this.end = end;
-        this.out = this.out = this.start + this.args.map(function (el) { return el.out; }).join("") + this.end;
+        this.out = this.out = this.start + this.args.reverse().map(function (el) { return el.out; }).join("") + this.end;
     }
     return GroupToken;
 }());
@@ -45,3 +45,13 @@ var FArgsToken = /** @class */ (function (_super) {
     return FArgsToken;
 }(GroupToken));
 exports.FArgsToken = FArgsToken;
+var RBodyToken = /** @class */ (function (_super) {
+    __extends(RBodyToken, _super);
+    function RBodyToken(content, start, end) {
+        var _this = _super.call(this, content, start || ':-', end || '. ') || this;
+        _this.out = _this.start + " " + _this.args.map(function (el) { return el.out; }).join(", ") + _this.end;
+        return _this;
+    }
+    return RBodyToken;
+}(GroupToken));
+exports.RBodyToken = RBodyToken;

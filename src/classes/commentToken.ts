@@ -1,15 +1,14 @@
-import {v4} from "uuid";
-
 export class CommentToken {
-    name: string
-    arguments: Array<string>
     id: string
     out: string
+    text: string | undefined;
 
-    constructor(text: string[]) {
-        this.id = v4();
-        this.name = '%';
-        this.arguments = text.slice(2, -2);
-        this.out = `${this.name} ${this.arguments.join(" ")}`;
+    constructor(tag: string, resources?: { id: string, text: string }[]) {
+        this.id = tag.slice(1)
+        this.text = resources?.filter(el => el.id == this.id).pop()?.text
+        if (this.text)
+            this.out = `${this.text}\n`;
+        else
+            this.out = "% --- \n"
     }
 }

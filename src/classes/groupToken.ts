@@ -15,7 +15,7 @@ class GroupToken {
         this.args = content
         this.start = start
         this.end = end
-        this.out = this.out = this.start + this.args.map(el => el.out).join("") + this.end
+        this.out = this.out = this.start + this.args.reverse().map(el => el.out).join("") + this.end
 
     }
 }
@@ -32,5 +32,12 @@ export class ListToken extends GroupToken {
 export class FArgsToken extends GroupToken {
     constructor(content: Token[], start?: string, end?: string) {
         super(content, start || '(', end || ')');
+    }
+}
+
+export class RBodyToken extends GroupToken {
+    constructor(content: Token[], start?: string, end?: string) {
+        super(content, start || ':-', end || '. ');
+        this.out = this.start + " " + this.args.map(el => el.out).join(", ") + this.end
     }
 }

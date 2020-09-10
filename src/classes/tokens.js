@@ -1,9 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SeparatorToken = exports.OperatorToken = exports.VariableToken = exports.TagToken = exports.RHeadToken = exports.ClauseToken = exports.FArgsToken = exports.CommentToken = exports.ListToken = exports.FactToken = void 0;
+exports.MathsToken = exports.SeparatorToken = exports.OperatorToken = exports.VariableToken = exports.TagToken = exports.RHeadToken = exports.ClauseToken = exports.FArgsToken = exports.CommentToken = exports.ListToken = exports.FactToken = void 0;
 var uuid_1 = require("uuid");
 var clauseToken_1 = require("./clauseToken");
 Object.defineProperty(exports, "ClauseToken", { enumerable: true, get: function () { return clauseToken_1.ClauseToken; } });
+Object.defineProperty(exports, "MathsToken", { enumerable: true, get: function () { return clauseToken_1.MathsToken; } });
 Object.defineProperty(exports, "RHeadToken", { enumerable: true, get: function () { return clauseToken_1.RHeadToken; } });
 var commentToken_1 = require("./commentToken");
 Object.defineProperty(exports, "CommentToken", { enumerable: true, get: function () { return commentToken_1.CommentToken; } });
@@ -15,17 +16,6 @@ Object.defineProperty(exports, "VariableToken", { enumerable: true, get: functio
 var groupToken_1 = require("./groupToken");
 Object.defineProperty(exports, "FArgsToken", { enumerable: true, get: function () { return groupToken_1.FArgsToken; } });
 Object.defineProperty(exports, "ListToken", { enumerable: true, get: function () { return groupToken_1.ListToken; } });
-// interface Token {
-//     label: string
-//     contents: string[]
-//     output: () => string
-// }
-// class PrototypeToken {
-//     label: string
-//     contents: string[]
-//     output: () => string
-//     id: number
-// }
 var FactToken = /** @class */ (function () {
     function FactToken(text) {
         var _this = this;
@@ -37,12 +27,14 @@ var FactToken = /** @class */ (function () {
     return FactToken;
 }());
 exports.FactToken = FactToken;
-function default_1(word) {
+function default_1(word, resources) {
     if (/^[A-Z][\w_ąęółśźż]*$/.test(word))
         return new tagToken_1.VariableToken(word);
+    if (/^%/.test(word))
+        return new commentToken_1.CommentToken(word, resources);
     if (word === ',')
         return new tagToken_1.SeparatorToken(word);
-    if (/^[|+]+$/.test(word))
+    if (/^(div|is|[*=<>+\-\\\/]+)$/.test(word))
         return new tagToken_1.OperatorToken(word);
     return new tagToken_1.TagToken(word);
 }

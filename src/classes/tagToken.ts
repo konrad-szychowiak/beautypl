@@ -13,17 +13,17 @@ export class TagToken {
 }
 
 export class VariableToken extends TagToken {}
+export class SeparatorToken extends TagToken {
+    constructor(word: string) {
+        super(word);
+        this.out = this.out + " "
+    }
+
+}
 
 export class OperatorToken extends TagToken {
     constructor(word: string) {
         super(word);
         this.out = ` ${this.name} `
-    }
-}
-
-export class SeparatorToken extends TagToken {
-    constructor(word: string, end: string = ' ') {
-        super(word);
-        this.out = this.name + end
     }
 }

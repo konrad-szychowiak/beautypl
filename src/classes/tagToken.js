@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SeparatorToken = exports.OperatorToken = exports.VariableToken = exports.TagToken = void 0;
+exports.OperatorToken = exports.SeparatorToken = exports.VariableToken = exports.TagToken = void 0;
 var uuid_1 = require("uuid");
 var TagToken = /** @class */ (function () {
     function TagToken(word) {
@@ -32,6 +32,16 @@ var VariableToken = /** @class */ (function (_super) {
     return VariableToken;
 }(TagToken));
 exports.VariableToken = VariableToken;
+var SeparatorToken = /** @class */ (function (_super) {
+    __extends(SeparatorToken, _super);
+    function SeparatorToken(word) {
+        var _this = _super.call(this, word) || this;
+        _this.out = _this.out + " ";
+        return _this;
+    }
+    return SeparatorToken;
+}(TagToken));
+exports.SeparatorToken = SeparatorToken;
 var OperatorToken = /** @class */ (function (_super) {
     __extends(OperatorToken, _super);
     function OperatorToken(word) {
@@ -42,14 +52,3 @@ var OperatorToken = /** @class */ (function (_super) {
     return OperatorToken;
 }(TagToken));
 exports.OperatorToken = OperatorToken;
-var SeparatorToken = /** @class */ (function (_super) {
-    __extends(SeparatorToken, _super);
-    function SeparatorToken(word, end) {
-        if (end === void 0) { end = ' '; }
-        var _this = _super.call(this, word) || this;
-        _this.out = _this.name + end;
-        return _this;
-    }
-    return SeparatorToken;
-}(TagToken));
-exports.SeparatorToken = SeparatorToken;

@@ -1,20 +1,8 @@
 import {v4 as uuid} from "uuid";
-import {ClauseToken, RHeadToken} from "./clauseToken";
+import {ClauseToken, MathsToken, RHeadToken} from "./clauseToken";
 import {CommentToken} from "./commentToken";
 import {OperatorToken, SeparatorToken, TagToken, VariableToken} from "./tagToken";
-import {FArgsToken, GroupingToken, ListToken} from "./groupToken";
-// interface Token {
-//     label: string
-//     contents: string[]
-//     output: () => string
-// }
-
-// class PrototypeToken {
-//     label: string
-//     contents: string[]
-//     output: () => string
-//     id: number
-// }
+import {RBodyToken, FArgsToken, GroupingToken, ListToken} from "./groupToken";
 
 export class FactToken {
 
@@ -41,12 +29,14 @@ export {
     TagToken,
     VariableToken,
     OperatorToken,
-    SeparatorToken
+    SeparatorToken,
+    MathsToken
 }
-export type Token = GroupingToken | CommentToken | ClauseToken | VariableToken | TagToken | OperatorToken | SeparatorToken
-export default function (word: string): Token {
+export type Token = GroupingToken | CommentToken | ClauseToken | VariableToken | TagToken | OperatorToken | SeparatorToken | MathsToken | RBodyToken
+export default function (word: string, resources?: { id: string, text: string }[]): Token {
     if (/^[A-Z][\w_ąęółśźż]*$/.test(word)) return new VariableToken(word)
+    if (/^%/.test(word)) return new CommentToken(word, resources)
     if (word === ',') return new SeparatorToken(word)
-    if (/^[|+]+$/.test(word)) return new OperatorToken(word)
+    if (/^(div|is|[*=<>+\-\\\/]+)$/.test(word)) return new OperatorToken(word)
     return new TagToken(word)
 }
