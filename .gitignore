@@ -1,4 +1,6 @@
 test_data/
+src/*.js
+src/*/*.js
 
 yarn.lock
 # Created by https://www.toptal.com/developers/gitignore/api/jetbrains,node,yarn
