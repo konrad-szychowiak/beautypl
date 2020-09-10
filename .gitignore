@@ -1,5 +1,6 @@
 test_data/
 
+yarn.lock
 # Created by https://www.toptal.com/developers/gitignore/api/jetbrains,node,yarn
 # Edit at https://www.toptal.com/developers/gitignore?templates=jetbrains,node,yarn
 
