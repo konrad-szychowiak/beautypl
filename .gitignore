@@ -1,4 +1,8 @@
+test_data/
+src/*.js
+src/*/*.js
 
+yarn.lock
 # Created by https://www.toptal.com/developers/gitignore/api/jetbrains,node,yarn
 # Edit at https://www.toptal.com/developers/gitignore?templates=jetbrains,node,yarn
 
@@ -118,7 +122,7 @@ lerna-debug.log*
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
-# Runtime data
+# Runtime test_data
 pids
 *.pid
 *.seed
