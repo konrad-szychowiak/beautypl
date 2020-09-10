@@ -5,12 +5,12 @@ import create_token, {
     ListToken,
     MathsToken,
     OperatorToken,
+    RBodyToken,
     RHeadToken,
     SeparatorToken,
     TagToken,
     Token
 } from "./classes/tokens";
-import {RBodyToken} from "./classes/groupToken";
 import {v4} from "uuid";
 
 const file = fs.readFileSync('./test_data/in.pro', 'utf8');
@@ -44,7 +44,7 @@ function join_tag_params(stack: Stack, token_constructor: typeof ClauseToken): S
 }
 
 // FIXME: something doesn't work here
-function collect_rule_body(stack: Stack): Stack {
+const collect_rule_body = (stack: Stack): Stack => {
     let body: Stack = [];
     while (stack.length > 1 && stack[stack.length - 1].out !== ':-' && stack[stack.length - 1].out !== '.') {
         const el = stack.pop() as Token
@@ -75,7 +75,7 @@ function collect_rule_body(stack: Stack): Stack {
 
     stack = [...stack, new RBodyToken(body), new SeparatorToken('.')]
     return stack
-}
+};
 
 // TODO: inline arguments to function arguments
 file

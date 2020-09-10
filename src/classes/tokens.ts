@@ -2,7 +2,7 @@ import {v4 as uuid} from "uuid";
 import {ClauseToken, MathsToken, RHeadToken} from "./clauseToken";
 import {CommentToken} from "./commentToken";
 import {OperatorToken, SeparatorToken, TagToken, VariableToken} from "./tagToken";
-import {RBodyToken, FArgsToken, GroupingToken, ListToken} from "./groupToken";
+import {FArgsToken, GroupingToken, ListToken, RBodyToken} from "./groupToken";
 
 export class FactToken {
 
@@ -30,9 +30,19 @@ export {
     VariableToken,
     OperatorToken,
     SeparatorToken,
-    MathsToken
+    MathsToken,
+    RBodyToken
 }
-export type Token = GroupingToken | CommentToken | ClauseToken | VariableToken | TagToken | OperatorToken | SeparatorToken | MathsToken | RBodyToken
+export type Token =
+    GroupingToken
+    | CommentToken
+    | ClauseToken
+    | VariableToken
+    | TagToken
+    | OperatorToken
+    | SeparatorToken
+    | MathsToken
+    | RBodyToken
 export default function (word: string, resources?: { id: string, text: string }[]): Token {
     if (/^[A-Z][\w_ąęółśźż]*$/.test(word)) return new VariableToken(word)
     if (/^%/.test(word)) return new CommentToken(word, resources)
