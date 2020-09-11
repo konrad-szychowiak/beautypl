@@ -12,7 +12,9 @@ export class TagToken {
     }
 }
 
-export class VariableToken extends TagToken {}
+export class VariableToken extends TagToken {
+}
+
 export class SeparatorToken extends TagToken {
     constructor(word: string) {
         super(word);

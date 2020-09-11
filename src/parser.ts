@@ -19,7 +19,7 @@ type Stack = Array<Token>
 let _stack: Stack = []
 let _comments: { id: string, text: string }[] = []
 
-function shrink(stack: Stack, to: string, token_constructor: typeof ListToken | typeof FArgsToken): Stack {
+export const shrink = (stack: Stack, to: string, token_constructor: typeof ListToken | typeof FArgsToken): Stack => {
     let params: Stack;
     params = [];
     while (stack && stack[stack.length - 1].out != to) {
@@ -32,7 +32,7 @@ function shrink(stack: Stack, to: string, token_constructor: typeof ListToken | 
         stack.push(new_token)
         return stack
     } else throw 'Stack is empty!'
-}
+};
 
 function join_tag_params(stack: Stack, token_constructor: typeof ClauseToken): Stack {
     const args: FArgsToken = <FArgsToken>stack.pop()
